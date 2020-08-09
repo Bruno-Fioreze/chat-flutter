@@ -103,11 +103,15 @@ class _HomeState extends State<Home> {
                 ? IconButton(
                     icon: Icon(Icons.exit_to_app),
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                      GoogleSignIn().signOut();
-                      SnackBar(
-                        content: Text("Você saiu com sucesso!"),
-                      );
+                      
+                      setState(() {
+                        FirebaseAuth.instance.signOut();
+                        GoogleSignIn().signOut();
+                        SnackBar(
+                          content: Text("Você saiu com sucesso!"),
+                        );
+                        _userF = null;
+                      });
                     })
                 : Container()
           ],
@@ -133,9 +137,7 @@ class _HomeState extends State<Home> {
                               itemCount: documents.length,
                               reverse: true,
                               itemBuilder: (context, index) {
-                                return ChatMessage(documents[index].data["uid"],
-                                  documents[index].data["uid"] == _userF?.uid
-                                );
+                                return ChatMessage(documents[index].data, documents[index].data["uid"] == _userF?.uid);
                               });
                       }
                     })),
@@ -144,5 +146,4 @@ class _HomeState extends State<Home> {
           ],
         ));
   }
-  
 }

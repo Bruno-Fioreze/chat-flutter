@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 class ChatMessage extends StatelessWidget {
   ChatMessage(this.data, this._mine);
 
-  final Map<String, dynamic> data;
+  final Map data;
   final bool _mine;
   @override
   Widget build(BuildContext context) {
